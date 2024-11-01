@@ -25,4 +25,15 @@ public class UserController {
 		return "user/signUp";
 	}
 	
+	
+	@GetMapping("/sign-in-view")
+	// http:localhost/sns/sign-in-view
+	public String SignInView() {
+		// return "layout/defaultLayout";
+		
+		// 가운데 Layout(section) 조각만 내려주면
+		// 전체 Layout과 함께 구성된다
+		return "user/signIn";
+	}
+	
 }
