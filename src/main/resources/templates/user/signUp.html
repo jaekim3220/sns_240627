@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html
+xmlns:th="http://www.thymeleaf.org" 
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+layout:decorate="~{layout/defaultLayout}"> <!-- 연결할 Layout(마크업 위치) -->
+
+	<!-- section 영역 : Layout 문법 사용 -->
+	<section layout:fragment="content" class="contents d-flex justify-content-center">
+		<div class="w-50 py-4">
+			<h1>로그인</h1>
+			<div class="w-100 h-100 bg-secondary">
+				<input type="text" class="form-control" id="inputId" placeholder="아이디를 입력하세요">
+				
+				<input type="password" class="form-control" id="inputPassword" placeholder="비밀번호를 입력하세요">
+			</div>
+		</div>
+	</section>
+	
+	
+	<!-- JS 영역 -->
+	<th:block layout:fragment="script">
+		<script>
+			
+		</script>
+	</th:block>
+
+</html>
