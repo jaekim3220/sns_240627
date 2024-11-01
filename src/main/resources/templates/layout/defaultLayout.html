@@ -4,20 +4,20 @@ lang="ko"
 xmlns:th="http://www.thymeleaf.org" 
 xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
-<!-- head 태그에 대한 config(조각) -->
+<!-- config(head, bootstrap, css...) -->
 <th:block th:replace="fragments/config :: configFragment"></th:block>
 
 <body>
-	
 	<div id="wrap">
-	
 		<!-- header 태그에 대한 config(조각) -->
 		<th:block th:replace="fragments/header :: headerFragment"></th:block>
 		
 		<!-- section 태그에 대한 section(조각) - Layout 문법 사용 -->
-		<div layout:fragment="content"></div>
+		<th:block layout:fragment="content"></th:block>
 		
+		<!-- 스크립트(교체되는 내용) - Layout 문법 사용 -->
+		<th:block layout:fragment="script"></th:block>
 	</div>
-
 </body>
+
 </html>

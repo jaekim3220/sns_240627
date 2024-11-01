@@ -1,14 +1,21 @@
 @charset "UTF-8";
 
-/* body {
-	background-color: #999
-} */
+/* header 영역 */
+header {height:80px; background-color:#ededed;}
+a, a:hover {color:#000;}
 
+/* signUp section 영역 */
+.sign-up-box {width:650px; background-color:#ebebeb; margin-top:20px; box-shadow:5px 5px 5px 5px #BDC0C0;}
+.sign-up-subject {margin:20px; font-weight:bold;}
 
-header {
-	height:100px;
-}
+/* signIn section 영역 */
+.shadow-box {width:550px; background-color:#ebebeb; margin-top:20px; box-shadow:5px 5px 5px 5px #BDC0C0;}
 
-.contents {
-	min-height:400px;
-}
+/* logIn section 영역 */
+.login-box {width:400px;}
+
+.contents-box {width:650px;}
+
+#writeTextArea {height:100px;}
+
+.comment-input {width:565px;}
