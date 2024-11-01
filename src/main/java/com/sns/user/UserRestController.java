@@ -9,17 +9,20 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/sns")
 public class UserRestController {
 
-//	@GetMapping("/is-duplicate-id")
-//	public Map<String, Object> isDuplicateId(
-//			@RequestParam("loginId") String loginId) {
-//		
-//		// 응답 값 breakpoint 1
-//		Map<String, Object> result = new HashMap<>();
-//		// TODO : result 값 넣기
-//		
-//		return result;
-//	}
+	@GetMapping("/is-duplicate-id")
+	public Map<String, Object> isDuplicateId(
+			@RequestParam("loginId") String loginId) { // HTML, JS에서 설정한 파라미터(변수)를 사용
+		
+		// 응답 값 breakpoint 1
+		// {"code":200, "is_duplicate_id":true}
+		Map<String, Object> result = new HashMap<>();
+		result.put("code", 200);
+		result.put("is_duplicate_id", false);
+		
+		return result;
+	}
+	
 }

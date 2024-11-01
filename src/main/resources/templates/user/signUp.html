@@ -97,12 +97,11 @@ layout:decorate="~{layout/defaultLayout}">
 						success:function(data) { // Dictionary
 							// Ajax의 응답은 String => JQuery의 함수가 JSON임을 알면
 							// => Dictionary 형식으로 변경
-							// {"code":200, "is_duplicated_name":true}
+							// {"code":200, "is_duplicate_id":true}
 							if (data.code == 200) {
 								if (data.is_duplicate_id) {
 									// 중복일 경우 경고 문구 노출
 									$("#idCheckDuplicated").removeClass("d-none");
-									retrun; 
 								} else {
 									// 사용 가능 => 경고 문구 없음
 									$("#idCheckOk").removeClass("d-none");
