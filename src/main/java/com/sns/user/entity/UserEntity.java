@@ -25,7 +25,7 @@ import lombok.ToString;
 @Table(name = "user")
 @Entity // JPA 엔티티 객체(사용하려면 lombok이 필요)
 public class UserEntity {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY) // insert 이후 방금 들어간 id 가져옴
 	private int id;
@@ -38,12 +38,12 @@ public class UserEntity {
 	private String name;
 	
 	private String email;
-	
+
 	@CreationTimestamp // 값이 null 이어도 insert 되는 시간으로 설정
-	@Column(name = "createdAt") // 카멜 케이스 설정
+	@Column(name = "createdAt")
 	private LocalDateTime createdAt;
-	
+
 	@UpdateTimestamp // insert, update 일 경우 해당 시간으로 설정
-	@Column(name = "updatedAt") // 카멜 케이스 설정
+	@Column(name = "updatedAt")
 	private LocalDateTime updatedAt;
 }
