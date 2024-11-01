@@ -15,6 +15,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/sns")
 public class UserController {
 
+	/**
+	 * 회원가입 화면
+	 * @return
+	 */
 	@GetMapping("/sign-up-view")
 	// http:localhost/sns/sign-up-view
 	public String SignUpView() {
@@ -26,6 +30,10 @@ public class UserController {
 	}
 	
 	
+	/**
+	 * 로그인 화면
+	 * @return
+	 */
 	@GetMapping("/sign-in-view")
 	// http:localhost/sns/sign-in-view
 	public String SignInView() {
