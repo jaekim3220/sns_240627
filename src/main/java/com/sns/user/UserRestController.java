@@ -28,13 +28,19 @@ public class UserRestController {
 		// DB SELECT breakpoint 2 
 		UserEntity user = userBO.getUserEntityByLoginId(loginId);
 		
+		// 중복인 경우/아닌 경우 구분 (Console 창의 SQL문에서 입력 값 return 확인)
+		boolean isDuplicate = false; // false : 중복 아님
+		if (user != null) { // 기존 값이 존재한다면 `중복`
+			isDuplicate = true;
+		}
+		
+		
 		// 응답 값 breakpoint 1
 		// 응답값 => Map => JSON String
 		// {"code":200, "is_duplicate_id":true}
 		Map<String, Object> result = new HashMap<>();
 		result.put("code", 200);
 		result.put("is_duplicate_id", false);
-		// TODO : ID가 중복인 경우, 중복이 아닌 경우 구현
 		
 		return result;
 	}
