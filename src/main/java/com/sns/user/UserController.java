@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 */
 
 @Controller // view 영역
-@RequestMapping("/sns")
+@RequestMapping("/user")
 public class UserController {
 
 	/**
@@ -20,7 +20,7 @@ public class UserController {
 	 * @return
 	 */
 	@GetMapping("/sign-up-view")
-	// http:localhost/sns/sign-up-view
+	// http:localhost/user/sign-up-view
 	public String SignUpView() {
 		// return "layout/defaultLayout";
 		
@@ -35,7 +35,7 @@ public class UserController {
 	 * @return
 	 */
 	@GetMapping("/sign-in-view")
-	// http:localhost/sns/sign-in-view
+	// http:localhost/user/sign-in-view
 	public String SignInView() {
 		// return "layout/defaultLayout";
 		

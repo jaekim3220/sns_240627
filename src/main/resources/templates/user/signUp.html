@@ -93,7 +93,7 @@ layout:decorate="~{layout/defaultLayout}">
 					$.ajax({
 						// request
 						type:"GET", // form 태그의 method 개념(민감하지 않거나 짧은 데이터는 Get 가능)
-						url: "/sns/is-duplicate-id", // form 태그의 action 개념
+						url: "/user/is-duplicate-id", // form 태그의 action 개념
 						data: {"loginId":loginId},
 						
 						// response
@@ -199,7 +199,7 @@ layout:decorate="~{layout/defaultLayout}">
 						if (data.code == 200) {
 							// 성공
 							alert("가입을 환영합니다. 로그인 해주세요.");
-							location.href = "/sns/sign-in-view"; // 로그인 화면으로 이동
+							location.href = "/user/sign-in-view"; // 로그인 화면으로 이동
 						} else {
 							// 로직 상 실패
 							alert(data.error_message);
