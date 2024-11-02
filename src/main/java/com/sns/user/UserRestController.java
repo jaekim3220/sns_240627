@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,7 +14,7 @@ import com.sns.user.bo.UserBO;
 import com.sns.user.entity.UserEntity;
 
 @RestController
-@RequestMapping("/sns")
+@RequestMapping("/user")
 // Restcontroller 생성 이후 Entity, Repository, BO를 구현
 public class UserRestController {
 
@@ -21,6 +22,11 @@ public class UserRestController {
 	@Autowired // DI(Dependency Injection) : 의존성 주입
 	private UserBO userBO;
 	
+	/**
+	 * 아이디 중복확인
+	 * @param loginId
+	 * @return
+	 */
 	@GetMapping("/is-duplicate-id")
 	public Map<String, Object> isDuplicateId(
 			@RequestParam("loginId") String loginId) { // HTML, JS에서 설정한 파라미터(변수)를 사용
@@ -42,6 +48,30 @@ public class UserRestController {
 		result.put("code", 200);
 		result.put("is_duplicate_id", false);
 		
+		return result;
+	}
+	
+	
+	@PostMapping("/sign-up")
+	public Map<String, Object> signUp(
+			@RequestParam("loginId") String loginId,
+			@RequestParam("password") String password,
+			@RequestParam("name") String name,
+			@RequestParam("email") String email) {
+		
+		// md5 알고리즘 - hashing(복호화 불가로 암호화 아님) - 이건 예전에 뚫렸음
+		// => 프로젝트에는 다른 암호화 알고리즘 사용
+		
+		
+		// DB INSERT
+		
+		
+		// 응답 값 breakpoint 1
+		// 응답값 => Map => JSON String
+		// {"code":200, "is_duplicate_id":true}
+		Map<String, Object> result = new HashMap<>();
+		result.put("code", 200);
+		result.put("result", "성공");
 		return result;
 	}
 	
