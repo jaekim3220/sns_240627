@@ -53,6 +53,14 @@ public class UserRestController {
 	}
 	
 	
+	/**
+	 * 회원가입
+	 * @param loginId
+	 * @param password
+	 * @param name
+	 * @param email
+	 * @return
+	 */
 	@PostMapping("/sign-up")
 	public Map<String, Object> signUp(
 			@RequestParam("loginId") String loginId,
