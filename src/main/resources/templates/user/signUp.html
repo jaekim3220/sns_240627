@@ -195,7 +195,7 @@ layout:decorate="~{layout/defaultLayout}">
 					// $.ajax는 GET, POST 메서드 중 선택해 데이터를 요청 
 					// $.post()메서드는 HTTP POST 요청만을 사용하여 서버에서 데이터를 요청
 					$.post(url, params) // request 영역
-					.done(function() { // response - callback 영역
+					.done(function(data) { // response - callback 영역
 						if (data.code == 200) {
 							// 성공
 							alert("가입을 환영합니다. 로그인 해주세요.");
