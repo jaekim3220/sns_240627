@@ -14,6 +14,7 @@ import com.sns.user.entity.UserEntity;
 
 @RestController
 @RequestMapping("/sns")
+// Restcontroller 생성 이후 Entity, Repository, BO를 구현
 public class UserRestController {
 
 	// 어노테이션(Annotation)
@@ -24,7 +25,7 @@ public class UserRestController {
 	public Map<String, Object> isDuplicateId(
 			@RequestParam("loginId") String loginId) { // HTML, JS에서 설정한 파라미터(변수)를 사용
 		
-		// DB SELECT breakpoint 2
+		// DB SELECT breakpoint 2 
 		UserEntity user = userBO.getUserEntityByLoginId(loginId);
 		
 		// 응답 값 breakpoint 1
@@ -33,6 +34,7 @@ public class UserRestController {
 		Map<String, Object> result = new HashMap<>();
 		result.put("code", 200);
 		result.put("is_duplicate_id", false);
+		// TODO : ID가 중복인 경우, 중복이 아닌 경우 구현
 		
 		return result;
 	}
