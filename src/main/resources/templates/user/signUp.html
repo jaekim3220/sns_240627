@@ -174,6 +174,24 @@ layout:decorate="~{layout/defaultLayout}">
 					}
 					
 					
+					// 전송 1) : form 전송 => 다음 화면으로 이동(form은 restcontroller 불가)
+					/*
+					$(this)[0].submit(); // 0번째 form을 전송
+					*/
+					
+					// 전송 2) : AJAX 호출 => JSON 응답
+					// form 태그를 활용한 AJAX 호출
+					// <form id="signUpForm" method="post" action="/user/sign-up">
+					let url = $(this).attr("action"); // form 태그의 action 값을 추출
+					// console.log(url); // 확인 후 주석처리 해야 에러 방지
+					
+					// form 태그의 name 속성과 value를 직렬화(입력값 - parameter 불러오기) => request 파라미터로 구성, 직렬화 : 전송을 위한 정렬
+					let params = $(this).serialize(); 
+					// console.log(params); // 확인 후 주석처리 해야 에러 방지
+					
+					
+					
+					
 					
 				}); // 회원가입 버튼 종료
 				
