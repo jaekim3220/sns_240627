@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.sns.common.EncryptUtils;
 import com.sns.user.bo.UserBO;
 import com.sns.user.entity.UserEntity;
 
@@ -61,6 +62,10 @@ public class UserRestController {
 		
 		// md5 알고리즘 - hashing(복호화 불가로 암호화 아님) - 이건 예전에 뚫렸음
 		// => 프로젝트에는 다른 암호화 알고리즘 사용
+		// 아이디 : aaaa => 74b8733745420d4d33f80c4663dc5e5
+		// 비밀번호 : aaaa => 74b8733745420d4d33f80c4663dc5e5
+		// breakpoint 2
+		String hashedPassword = EncryptUtils.md5(password);
 		
 		
 		// DB INSERT
