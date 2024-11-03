@@ -14,6 +14,9 @@ import com.sns.common.EncryptUtils;
 import com.sns.user.bo.UserBO;
 import com.sns.user.entity.UserEntity;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
+
 @RestController
 @RequestMapping("/user")
 // Restcontroller 생성 이후 Entity, Repository, BO를 구현
@@ -97,17 +100,24 @@ public class UserRestController {
 	@PostMapping("/sign-in")
 	public Map<String, Object> signIn(
 			@RequestParam("loginId") String loginId,
-			@RequestParam("password") String password) {
+			@RequestParam("password") String password,
+			HttpServletRequest request) {
 		
 		// DB SELECT breakpoint 2(데이터가 있는 경우 : user, 없는 경우 : null)
 		UserEntity user = userBO.getUserEntityByLoginIdPassword(loginId, password);
 		
 		// 응답값 breakpoint 1(Console 창에서 쿼리문 확인)
 		Map<String, Object> result = new HashMap<>();
-		if(user != null) { // DB에 입력 정보(parameter 값과 동일한 데이터)가 있는 경우
+		if(user != null) {
+			// session에 사용자 정보를 담는다(사용자 각각 담는다) => 로그인한 사용자 만큼 생성됨
+			HttpSession session = request.getSession(); // session 생성
+			session.setAttribute("userId", user.getId()); // session에 삽입
+			session.setAttribute("userLoginId", user.getLoginId()); // session에 삽입
+			session.setAttribute("userName", user.getName()); // session에 삽입
+			
 			result.put("code", 200);
 			result.put("result", "성공");
-		} else { // DB에 입력 값이 없는 경우
+		} else {
 			result.put("code", 300);
 			result.put("error_message", "존재하지 않는 사용자입니다.");
 		}
