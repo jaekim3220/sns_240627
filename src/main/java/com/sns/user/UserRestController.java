@@ -104,8 +104,13 @@ public class UserRestController {
 		
 		// 응답값 breakpoint 1(Console 창에서 쿼리문 확인)
 		Map<String, Object> result = new HashMap<>();
-		result.put("code", 200);
-		result.put("result", "성공");
+		if(user != null) { // DB에 입력 정보(parameter 값과 동일한 데이터)가 있는 경우
+			result.put("code", 200);
+			result.put("result", "성공");
+		} else { // DB에 입력 값이 없는 경우
+			result.put("code", 300);
+			result.put("error_message", "존재하지 않는 사용자입니다.");
+		}
 		
 		return result;
 		
