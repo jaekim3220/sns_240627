@@ -93,4 +93,20 @@ public class UserRestController {
 		return result;
 	}
 	
+	
+	@PostMapping("/sign-in")
+	public Map<String, Object> signIn(
+			@RequestParam("loginId") String loginId,
+			@RequestParam("password") String password) {
+		
+		// 응답값 breakpoint 1(Console 창에서 쿼리문 확인)
+		Map<String, Object> result = new HashMap<>();
+		result.put("code", 200);
+		result.put("result", "성공");
+		
+		return result;
+		
+	}
+	
+	
 }
