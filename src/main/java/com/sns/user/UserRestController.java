@@ -99,6 +99,9 @@ public class UserRestController {
 			@RequestParam("loginId") String loginId,
 			@RequestParam("password") String password) {
 		
+		// DB SELECT breakpoint 2(데이터가 있는 경우 : user, 없는 경우 : null)
+		UserEntity user = userBO.getUserEntityByLoginIdPassword(loginId, password);
+		
 		// 응답값 breakpoint 1(Console 창에서 쿼리문 확인)
 		Map<String, Object> result = new HashMap<>();
 		result.put("code", 200);

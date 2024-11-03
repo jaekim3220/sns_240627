@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.sns.common.EncryptUtils;
 import com.sns.user.entity.UserEntity;
 import com.sns.user.repository.UserRepository;
 
@@ -38,6 +39,18 @@ public class UserBO {
 				.name(name)
 				.email(email)
 				.build()); 
+	}
+	
+	
+	// @PostMapping("/sign-in") 구현
+	// input : loginId, password
+	// output : UserEntity
+	public UserEntity getUserEntityByLoginIdPassword(String loginId, String password) {
+		// 비밀번호 hashing
+		String hashedPassword = EncryptUtils.md5(password);
+		
+		// 조회
+		return userRepository.findByLoginIdAndPassword(loginId, hashedPassword);
 	}
 	
 	
