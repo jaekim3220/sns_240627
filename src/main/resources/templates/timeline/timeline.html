@@ -10,23 +10,31 @@
 	
 		<!-- 글쓰기 영역 -->
 		<div class="write-box border rounded m-3"> <!-- border로 감싸기 -->
-			<textarea id="writeTextArea" 
-			placeholder="내용을 입력해주세요" 
-			class="w-100 border-0"></textarea>
 			
-			<!-- 이미지 아이콘 영역 -->
-			<div class="d-flex justify-content-between">
-				<!-- file 태그를 숨겨두고 이미지를 클릭하면 파일을 클릭한 것과 같은 효과를 준다. ※ 강사님 github 참고 -->
-				<input type="file" id="file" accept=".jpg, .png, .gif" class="d-none">
-			
-				<!-- 이미지에 마우스 올리면 마우스 커서가 link로 변경 ※ 강사님 github 참고 -->
-				<a href="#" id="fileUploadBtn"><img width="35" src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-image-512.png"></a>
-				<div id="fileName" class="ml-2"></div>
+			<!-- 로그인이 되어 있을 경우 -->
+			<div th:if="${session.userName != null}">
+				<textarea id="writeTextArea" 
+				placeholder="내용을 입력해주세요" 
+				class="w-100 border-0"></textarea>
 				
-				<!-- 업로드 버튼 영역 -->
-				<button id="writeBtn" class="btn btn-info">업로드</button>
+				<!-- 이미지 아이콘 영역 -->
+				<div class="d-flex justify-content-between">
+					<!-- file 태그를 숨겨두고 이미지를 클릭하면 파일을 클릭한 것과 같은 효과를 준다. ※ 강사님 github 참고 -->
+					<input type="file" id="file" accept=".jpg, .png, .gif" class="d-none">
+				
+					<!-- 이미지에 마우스 올리면 마우스 커서가 link로 변경 ※ 강사님 github 참고 -->
+					<a href="#" id="fileUploadBtn"><img width="35" src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-image-512.png"></a>
+					<div id="fileName" class="ml-2"></div>
+					
+					<!-- 업로드 버튼 영역 -->
+					<button id="writeBtn" class="btn btn-info">업로드</button>
+				</div>
 			</div>
-			
+
+			<!-- 로그인이 되어 있지 않을 경우 -->
+			<div th:unless="${session.userName != null}">
+				
+			</div>
 			
 			<!-- 타임라인 : orderby를 사용해 최신 글을 우선 -->
 			<div class="timeline-box my-5">
@@ -77,18 +85,24 @@
 							<span class="font-weight-bold">userId</span>
 							<span>content</span>
 							
-							<!-- 댓글 삭제 -->
-							<a href="#" class="comment-del-btn">
-								<img src="img/timeline/x-icon.png" width="10" height="10">
-							</a>
+							<!-- 로그인이 되어 있을 경우 -->
+							<div th:if="${session.userName != null}">
+								<!-- 댓글 삭제 -->
+								<a href="#" class="comment-del-btn">
+									<img src="img/timeline/x-icon.png" width="10" height="10">
+								</a>
+							</div>
 						</div>
 						
-						
-						<!-- 댓글 작성 영역 -->
-						<div class="comment-write d-flex border-top mt-2">
-							<input type="text" class="comment-input form-control border-0 mr-2" placeholder="댓글 내용을 입력해주세요">
-							<button type="button" class="comment-btn btn btn-light text-primary w-25">게시</button>
-						</div>
+
+						<!-- 로그인이 되어 있을 경우 -->
+						<div th:if="${session.userName != null}">
+							<!-- 댓글 작성 영역 -->
+							<div class="comment-write d-flex border-top mt-2">
+								<input type="text" class="comment-input form-control border-0 mr-2" placeholder="댓글 내용을 입력해주세요">
+								<button type="button" class="comment-btn btn btn-light text-primary w-25">게시</button>
+							</div>
+						</div>						
 						
 					</div>
 					
