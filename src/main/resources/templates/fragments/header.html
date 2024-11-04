@@ -14,12 +14,12 @@
                 <!-- 로그인이 되어 있을 경우 -->
                 <div th:if="${session.userName != null}">
 					<span th:text="|${session.userName}님 안녕하세요|"></span>
-					<a href="/user/sign-out">로그아웃</a>
+					<a href="/user/sign-out" class="bg-white">로그아웃</a>
 				</div>
 				
 				<!-- 로그인이 되어 있지 않을 경우 -->
 				<div th:unless="${session.userName != null}">
-					<a href="/user/sign-in-view">로그인</a>
+					<a href="/user/sign-in-view" class="bg-white">로그인</a>
 				</div>
 				
 			</div>
