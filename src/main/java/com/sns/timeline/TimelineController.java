@@ -1,6 +1,10 @@
 package com.sns.timeline;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 /*
@@ -21,10 +25,16 @@ Model은 HTML일 경우 사용(@ResponseBody일 경우 Model 사용 불가)
 @Controller
 public class TimelineController {
 
+	@Autowired
+	private PostBO postBO;
 	
 	@GetMapping("/timeline")
 	// http:localhost/timeline
-	public String timeline() {
+	public String timeline(Model model) {
+		List<PostEntity> postList = postBO.
+				
+		model.addattribut
+		
 		return "timeline/timeline";
 	}
 }
