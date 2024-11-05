@@ -7,6 +7,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import com.sns.post.bo.PostBO;
+import com.sns.post.entity.PostEntity;
+
 /*
 DB연동 : View영역 <--> Controller영역(Domain) <--> Service(BO)영역 <--> Repository영역(Mapper) <--> DB영역 
 */
@@ -31,9 +34,14 @@ public class TimelineController {
 	@GetMapping("/timeline")
 	// http:localhost/timeline
 	public String timeline(Model model) {
-		List<PostEntity> postList = postBO.
-				
-		model.addattribut
+		
+		// DB SELECT - breakpoint
+		List<PostEntity> postList = postBO.getPostList();
+		
+		// MODEL 데이터 삽입 - breakpoint
+		// Controller가 Model에 데이터를 삽입
+		// HTML(VIEW)가 Model에서 꺼내서 사용
+		model.addAttribute("postList", postList);
 		
 		return "timeline/timeline";
 	}
