@@ -34,4 +34,24 @@ DB연동 : View영역 <--> Controller영역(Domain) <--> Service(BO)영역 <--> 
 @Entity // JPA 엔티티 객체(사용하려면 lombok이 필요)
 public class PostEntity {
 
+	// 속성 : field(`sns_240627`의 `post` 테이블)
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY) // insert 이후 방금 들어간 id(PK) 값을 가져옴
+	private int id;
+	
+	@Column(name = "userId") // 카멜 케이스 설정
+	private int userId;
+	
+	private String content;
+	
+	@Column(name = "imagePath") // 카멜 케이스 설정
+	private String imagePath;
+	
+	@CreationTimestamp // 값이 null 이어도 insert 되는 시간으로 설정
+	@Column(name = "createdAt") // 카멜 케이스 설정
+	private LocalDateTime createdAt;
+	
+	@UpdateTimestamp // insert, update 일 경우 해당 시간으로 설정
+	@Column(name = "updatedAt") // 카멜 케이스 설정
+	private LocalDateTime updatedAt;
 }
