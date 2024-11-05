@@ -40,7 +40,7 @@
 			<div class="timeline-box my-5">
 				
 				<!-- 타임라인 내용(userId, imagePath, content) 영역 -->
-				<div class="card border rounded mt-3">
+				<div th:each="post : ${postList}" class="card border rounded mt-3">
 					
 					<!-- 내용 시작 - 글쓴이, 더보기 영역 -->
 					<div class="p-2 d-flex justify-content-between bg-secondary">
