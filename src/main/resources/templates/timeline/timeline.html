@@ -44,8 +44,8 @@
 					
 					<!-- 내용 시작 - 글쓴이, 더보기 영역 -->
 					<div class="p-2 d-flex justify-content-between bg-secondary">
-						<!-- 글쓴이 -->
-						<span class="font-weight-bold">글쓴이</span>
+						<!-- 글쓴이 => th문법으로 userId로 대체 -->
+						<span class="font-weight-bold" th:text="${post.userId}">글쓴이</span>
 						
 						<!-- 더보기(누르면 `삭제`, `취소`) -->
 						<a href="#" class="more-btn">
@@ -55,7 +55,7 @@
 					
 					<!-- imagePath 영역 -->
 					<div class="card-img">
-						<img src="img/timeline/father_bobo.jpg" class="w-100" alt="본문 이미지">
+						<img th:src="${post.imagePath}" class="w-100" alt="본문 이미지">
 					</div>
 						
 					<!-- 좋아요 -->
@@ -68,8 +68,8 @@
 					
 					<!-- userId, content 영역 -->
 					<div class="card-post m-3">
-						<span class="font-weight-bold">userId</span>
-						<span>content</span>
+						<span class="font-weight-bold" th:text="${post.userId}">userId</span>
+						<span th:text="${post.content}">content</span>
 					</div>
 					
 					
