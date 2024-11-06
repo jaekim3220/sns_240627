@@ -159,11 +159,72 @@
     				return;
     			}
     			
-    			
     			// 2) 파일명 노출
     			$("#fileName").text(fileName);
     			
+    			
     		}); // 파일이 선택될 때	종료
+    		
+    		
+			// 업로드 버튼 클릭
+    		$("#writeBtn").on("click", function(e) {
+    			// alert("업로드 버튼");
+    			
+    			// validation(필수 파라미터)
+    			let writeTextArea = $("#writeTextArea").val().trim();
+    			let fileName = $("#file").val();
+    			// console.log(fileName); // C:\fakepath\[브랜드평판]IT서비스.jpg
+    			// return; // 넘어가는 것 방지
+    			
+    			// validation이 공백일 경우
+    			if(!writeTextArea) {
+    				alert("내용을 입력하세요");
+    				return;// subject일 경우 return flase, click일 경우 return
+    			}
+    			
+    			
+    			// 파일 확장자 체크는 넘어감(위에서 유효성 체크 했음)
+    			
+    			
+    			// 이미지 저장(이미지는 form 태그 필수 => JS에서 구현 가능)
+    			// form을 JS에서 생성 후 AJAX에서 구현 가능
+    			// form 태그 3종 세트 : form 태그(method), name 속성(parameter), submit 타입(parameter 전송)
+    			let formData = new FormData();
+    			formData.append("writeTextArea", writeTextArea); // requestParameter 이름 + form 태그의 name
+    			formData.append("file", $("#file")[0].files[0]); // 다중 파일의 경우 배열을 생성해서 저장된 길이만큼 진행
+    			
+
+       			// AJAX 요청
+    			$.ajax({
+    				// request
+    				type:"POST", // 용량이 큰 img 파일
+    				url:"/post/create",
+    				data:formData, // json, key-value, formData
+    				processData:false, // 파일 업로드 필수 설정(form)
+    				contentType:false, // 파일 업로드 필수 설정(form)
+    				enctype:"multipart/form-data", // 파일 업로드 필수 설정(form) - 이미지 인코딩
+    				
+    				// response
+    				success:function(data) {
+    					// 성공일 때 alert 후 목록 화면으로 이동
+    					if (data.code == 200) { // Dictionary 형태
+    						// Ajax의 응답은 String => JQuery의 함수가 JSON임을 알면
+    						// => Dictionary 형식으로 변경
+    						// {code:200, }
+    						alert("게시글이 저장되었습니다.");
+    						location.href = "/timeline";
+    					} else {
+    						alert(data.error_message);
+    					}
+    				}, // 성공일 경우
+    				error:function(e) {
+    					alert("글을 저장하는데 실패했습니다.");
+    				}
+    				
+    			}); // AJAX 요청 종료
+    			
+    			
+    		}); // 업로드 버튼 클릭 종료
     		
     		
     	});
