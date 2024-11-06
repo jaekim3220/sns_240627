@@ -18,14 +18,16 @@
 				class="w-100 border-0"></textarea>
 				
 				<!-- 이미지 아이콘 영역 -->
-				<div class="d-flex justify-content-between">
-					<!-- file 태그를 숨겨두고 이미지를 클릭하면 파일을 클릭한 것과 같은 효과를 준다. ※ 강사님 github 참고 -->
-					<input type="file" id="file" accept=".jpg, .png, .gif" class="d-none">
-				
-					<!-- 이미지에 마우스 올리면 마우스 커서가 link로 변경 ※ 강사님 github 참고 -->
-					<a href="#" id="fileUploadBtn"><img width="35" src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-image-512.png"></a>
-					<div id="fileName" class="ml-2"></div>
+				<div class="d-flex justify-content-between ">
+					<div class="file-upload d-flex align-items-center">
+						<!-- file 태그를 숨겨두고 이미지를 클릭하면 파일을 클릭한 것과 같은 효과를 준다. ※ 강사님 github 참고 -->
+						<input type="file" id="file" accept=".jpg, .png, .gif" class="d-none">
 					
+						<!-- 이미지에 마우스 올리면 마우스 커서가 link로 변경 ※ 강사님 github 참고 -->
+						<a href="#" id="fileUploadBtn"><img width="35" src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-image-512.png">
+						</a>
+						<div id="fileName" class="ml-2">파일명</div>
+					</div>
 					<!-- 업로드 버튼 영역 -->
 					<button id="writeBtn" class="btn btn-info">업로드</button>
 				</div>
@@ -118,6 +120,53 @@
 
 <th:block layout:fragment="script">
     <script>
+    	
+    	$(document).ready(function() {
+    		// 이미지 a태그 클릭 => 숨겨져 있는 id="file" 동작
+    		$("#fileUploadBtn").on("click", function(e) {
+    			e.preventDefault(); // 위로 올라가는 현상 방지
+    			// alert("이미지 클릭");
+    			
+    			
+    			$("#file").click(); // 클릭 함수 활성화
+    			
+    		}); // 이미지 a태그 클릭 종료
+    		
+    		
+    		// 파일이 선택될 때		1) 유효성 체크		2) 파일명 노출
+    		$("#file").on("change", function(e) {
+    			
+    			// `취소` 누를 때 처리(파일이 비워지므로 name을 뽑다가 에러 발생)
+    			if(e.target.files[0] == null) {
+    				$("#file").val(""); // 잘못 선택한 파일이 있으면 선택된 파일 초기화
+    				$("#fileName").text("파일명"); // 잘못 선택한 파일이 있으면 파일이름 초기화
+    				return;
+    			}
+    			
+    			// alert("파일선택");
+    			let fileName = e.target.files[0].name; // 0번째 파일명 추출
+    			// console.log(fileName);
+    			
+    			// 1) 유효성 체크
+    			let ext = fileName.split(".").pop().toLowerCase();
+    			// console.log(ext);
+    			
+    			// 업로드 가능한 파일 형식 제한
+    			if(ext != "gif" && ext != "jpg" && ext != "png") {
+    				alert("이미지 파일만 업로드 할 수 있습니다.");
+    				$("#file").val(""); // 잘못 선택한 파일이 있으면 선택된 파일 초기화
+    				$("#fileName").text("파일명"); // 잘못 선택한 파일이 있으면 파일이름 초기화
+    				return;
+    			}
+    			
+    			
+    			// 2) 파일명 노출
+    			$("#fileName").text(fileName);
+    			
+    		}); // 파일이 선택될 때	종료
+    		
+    		
+    	});
     
     </script>
 </th:block>
