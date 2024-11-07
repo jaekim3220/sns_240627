@@ -3,10 +3,13 @@ package com.sns.comment;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.sns.comment.bo.CommentBO;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -29,13 +32,17 @@ DB연동 : View영역 <--> Controller영역(Domain) <--> Service(BO)영역 <--> 
 public class CommentRestController {
 
 	
+	// 어노테이션(Annotation)
+	@Autowired // DI(Dependency Injection) : 의존성 주입
+	private CommentBO commentBO;
+	
 	// 댓글 쓰기 API
 	@PostMapping("/create")
 	// http:localhost/comment/create
 	public Map<String, Object> create(
 			// 필수 파라미터 불러오기1 : value, required 생략 (추천) - null이 아닌 column - lesson03 참고
 			@RequestParam("postId") int postId,
-			@RequestParam("content") int content,
+			@RequestParam("content") String content,
 			HttpSession session) {
 		
 		// 로그인 여부 - breakpoint
@@ -49,7 +56,7 @@ public class CommentRestController {
 		
 		
 		// DB INSERT - breakpoint
-		commentBO.addComment
+		commentBO.addComment(postId, userId, content);
 		
 		
 		// Response(응답값) - breakpoint
