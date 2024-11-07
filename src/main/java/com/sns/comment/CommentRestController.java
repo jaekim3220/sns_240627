@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -38,13 +39,14 @@ public class CommentRestController {
 	
 	// 댓글 쓰기 API
 	@PostMapping("/create")
+	// http:localhost/comment/create?postId=1&content=댓글테스트
 	// http:localhost/comment/create
 	public Map<String, Object> create(
 			// 필수 파라미터 불러오기1 : value, required 생략 (추천) - null이 아닌 column - lesson03 참고
 			@RequestParam("postId") int postId,
 			@RequestParam("content") String content,
 			HttpSession session) {
-		
+		 
 		// 로그인 여부 - breakpoint
 		Integer userId = (Integer)session.getAttribute("userId");
 		Map<String, Object> result = new HashMap<>();
