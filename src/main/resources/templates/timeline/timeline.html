@@ -255,7 +255,23 @@
     			// 버튼 별로 고유의 id 추출
     			let postID = $(this).data("post-id"); // 지금 클릭한 게시 버튼의 아이디 추출
     			// alert(postID);
+
+    			// 게시 버튼을 클릭했을 때 내용 추출
+    			// 1)
+    			// let content = $(this).prev().val().trim(); // 선택한 요소의 이전 요소를 선택
     			
+    			// 2)
+    			let content = $(this).siblings("input").val().trim(); // 형제가 여러 개일 경우(태그, 클레스, 아이디로 구분)
+    			// alert(content);
+    			
+    			
+    			// AJAX 요청
+    			$.ajax({
+    				// request
+    				
+    				// response
+    				
+    			}); // AJAX 요청 종료
     			
     			
     		}); // `게시` 버튼을 클릭(댓글 쓰기) 종료
