@@ -169,28 +169,43 @@
 			// 업로드 버튼 클릭
     		$("#writeBtn").on("click", function(e) {
     			// alert("업로드 버튼");
+
+    			
+    			// 비필수 파라미터
+    			let content = $("#writeTextArea").val().trim();
     			
     			// validation(필수 파라미터)
-    			let writeTextArea = $("#writeTextArea").val().trim();
-    			let fileName = $("#file").val();
-    			// console.log(fileName); // C:\fakepath\[브랜드평판]IT서비스.jpg
+    			let file = $("#file").val();
+    			// console.log(file); // C:\fakepath\[브랜드평판]IT서비스.jpg
     			// return; // 넘어가는 것 방지
     			
-    			// validation이 공백일 경우
-    			if(!writeTextArea) {
-    				alert("내용을 입력하세요");
+    			// validation(필수 파라미터)이 공백일 경우
+    			if(!file) {
+    				alert("파일을 업로드 해주세요");
     				return;// subject일 경우 return flase, click일 경우 return
     			}
     			
     			
-    			// 파일 확장자 체크는 넘어감(위에서 유효성 체크 했음)
+    			// 파일명이 있으면 확장자 체크(한 번더 체크)
+    			// C:\fakepath\[브랜드평판]IT서비스.jpg
+    			
+    			// 확장자 추출
+   				let extension = fileName.split(".").pop().toLowerCase();
+   				// console.log(extension);
+   				
+   				// 이미지 형식이 아닌 파일 선택 시 alert 띄운 후 파일 drop
+   				if($.inArray(extension, ["jpg", "png", "gif", "jpeg"]) == -1) {
+   					alert("이미지 파일만 업로드 할 수 있습니다.");
+   					$("#file").val(""); // 파일 초기화
+   					return;
+   				}
     			
     			
     			// 이미지 저장(이미지는 form 태그 필수 => JS에서 구현 가능)
     			// form을 JS에서 생성 후 AJAX에서 구현 가능
     			// form 태그 3종 세트 : form 태그(method), name 속성(parameter), submit 타입(parameter 전송)
     			let formData = new FormData();
-    			formData.append("writeTextArea", writeTextArea); // requestParameter 이름 + form 태그의 name
+    			formData.append("content", content); // requestParameter 이름 + form 태그의 name
     			formData.append("file", $("#file")[0].files[0]); // 다중 파일의 경우 배열을 생성해서 저장된 길이만큼 진행
     			
 
@@ -212,8 +227,11 @@
     						// => Dictionary 형식으로 변경
     						// {code:200, }
     						alert("게시글이 저장되었습니다.");
-    						location.href = "/timeline";
-    					} else {
+    						location.reload();
+    					} else if(data.code == 403) { // 비로그인 일 경우
+    						location.href = "/user/sign-in-view";
+    					}
+    					else {
     						alert(data.error_message);
     					}
     				}, // 성공일 경우
