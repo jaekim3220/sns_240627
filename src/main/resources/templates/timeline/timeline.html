@@ -102,7 +102,7 @@
 							<!-- 댓글 작성 영역 -->
 							<div class="comment-write d-flex border-top mt-2">
 								<input type="text" class="comment-input form-control border-0 mr-2" placeholder="댓글 내용을 입력해주세요">
-								<button type="button" class="comment-btn btn btn-light text-primary w-25">게시</button>
+								<button type="button" class="comment-btn btn btn-light text-primary w-25" th:data-post-id="${post.id}">게시</button>
 							</div>
 						</div>						
 						
@@ -243,6 +243,22 @@
     			
     			
     		}); // 업로드 버튼 클릭 종료
+    		
+    		
+    		// `게시` 버튼을 클릭(댓글 쓰기)
+    		/* 반복되는 마크업(카드)이 있을 경우 id가 아닌 class 사용 */
+    		$(".comment-btn").on("click", function(e) {
+    			// alert("게시 버튼");
+    			 e.preventDefault();
+    			
+    			// validation
+    			// 버튼 별로 고유의 id 추출
+    			let postID = $(this).data("post-id"); // 지금 클릭한 게시 버튼의 아이디 추출
+    			// alert(postID);
+    			
+    			
+    			
+    		}); // `게시` 버튼을 클릭(댓글 쓰기) 종료
     		
     		
     	});
