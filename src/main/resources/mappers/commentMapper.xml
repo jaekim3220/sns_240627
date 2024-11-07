@@ -7,19 +7,19 @@
 	<insert id="insertComment" parameterType="map">
 		INSERT INTO `comment`
 		(
-			`postId`
-			,`userId`
-			,`content`
-			,`createdAt`
-			,`updatedAt`
+			`postId`, 
+			`userId`, 
+			`content`, 
+			`createdAt`, 
+			`updatedAt`
 		)
 		VALUES
 		(
-			#{postId}
-			, #{userId}
-			, #{content}
-			, NOW()
-			, NOW()
+			#{postId}, 
+			#{userId}, 
+			#{content}, 
+			NOW(), 
+			NOW()
 		)
 	</insert>
 	
