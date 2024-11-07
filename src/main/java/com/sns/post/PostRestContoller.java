@@ -64,6 +64,7 @@ public class PostRestContoller {
 		}
 		
 		// postBO
+		postBO.addPost(userId, userLoginId, content, file);
 		
 		result.put("code", 200);
 		result.put("result", "성공");
