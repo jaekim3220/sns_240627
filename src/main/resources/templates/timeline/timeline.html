@@ -85,7 +85,9 @@
 						<div class="card-comment m-1">
 							<!-- userId, content 영역 -->
 							<span class="font-weight-bold">userId</span>
-							<span>content</span>
+							<!-- <span class="font-weight-bold" th:text="${post.userId}">userId</span> -->
+							<span >content</span>
+							<!-- <span th:text="${comment.content}">content</span> -->
 							
 							<!-- 로그인이 되어 있을 경우 -->
 							<div th:if="${session.userName != null}">
@@ -253,7 +255,7 @@
     			
     			// validation
     			// 버튼 별로 고유의 id 추출
-    			let postID = $(this).data("post-id"); // 지금 클릭한 게시 버튼의 아이디 추출
+    			let postId = $(this).data("post-id"); // 지금 클릭한 게시 버튼의 아이디 추출
     			// alert(postID);
 
     			// 게시 버튼을 클릭했을 때 내용 추출
@@ -268,8 +270,29 @@
     			// AJAX 요청
     			$.ajax({
     				// request
+    				type:"POST", // 용량이 큰 img 파일
+    				url:"/comment/create",
+    				data:{"postID":postID, "content":content}, // json, key-value, formData 가능
     				
     				// response
+    				success:function(data) {
+    					// 성공일 때 alert 후 목록 화면으로 이동
+    					if (data.code == 200) { // Dictionary 형태
+    						// Ajax의 응답은 String => JQuery의 함수가 JSON임을 알면
+    						// => Dictionary 형식으로 변경
+    						// {code:200, "result":"성공"}
+    						alert("댓글이 저장되었습니다.");
+    						location.reload();
+    					} else if(data.code == 403) { // 비로그인 일 경우(로그인 화면으로)
+    						location.href = "/user/sign-in-view";
+    					}
+    					else {
+    						alert(data.error_message);
+    					}
+    				}, // 성공일 경우
+    				error:function(e) {
+    					alert("댓글을 저장하는데 실패했습니다.");
+    				}
     				
     			}); // AJAX 요청 종료
     			
