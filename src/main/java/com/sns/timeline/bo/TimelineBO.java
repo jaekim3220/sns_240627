@@ -32,6 +32,15 @@ public class TimelineBO {
 	public List<CardDTO> generateCardList() {
 		List<CardDTO> cardList = new ArrayList<>();
 		
+		// 글 목록 추출(모든 목록을 추출 후 List 형식으로 저장) - breakpoint
+		List<PostEntity> postList = postBO.getPostList();
+		
+		
+		// 글 1개를 각각 CardDTO로 변환(반복문) - breakpoint
+		for (PostEntity postEntity : postList) { // 향상된 for문
+			
+		}
+		
 		return cardList;
 	}
 	
