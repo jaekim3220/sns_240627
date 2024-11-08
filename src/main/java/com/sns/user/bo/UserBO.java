@@ -54,4 +54,11 @@ public class UserBO {
 	}
 	
 	
+	// input : userId
+	// output : UerEntity or null
+	// TimelineBO 영역
+	public UserEntity getUserEntityById(int userId) {
+		return userRepository.findById(userId).orElse(null); // PK로 추출 : 내장 메서드 사용
+	}
+	
 }

@@ -39,6 +39,22 @@ public class TimelineBO {
 		// 글 1개를 각각 CardDTO로 변환(반복문) - breakpoint
 		for (PostEntity postEntity : postList) { // 향상된 for문
 			
+			// 생성한 DTO를 사용해 DB 데이터를 받을 변수를 생성 - breakpoint
+			CardDTO card = new CardDTO();
+			
+			// DTO 변수에 setter를 사용해 `post`의 글 정보 삽입 - breakpoint
+			card.setPostEntity(postEntity);
+			
+			// DTO 변수에 `post`의 글쓴이 정보 삽입 - breakpoint
+			// 1)
+			// int userId = postEntity.getUserId(); // 글쓴이 번호
+			// 2) - User 영역을 거친 후 userId 데이터를 가져올 수 있도록 UserBO에 새로운 메서드 생성
+			card.setUserEntity(userBO.getUserEntityById(postEntity.getUserId()));
+			
+			
+			// ★★★★★ list에 DTD 삽입 - breakpoint
+			cardList.add(card);
+			
 		}
 		
 		return cardList;
