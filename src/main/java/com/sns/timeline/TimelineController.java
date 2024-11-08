@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import com.sns.comment.bo.CommentBO;
 import com.sns.post.bo.PostBO;
 import com.sns.post.entity.PostEntity;
+import com.sns.timeline.bo.TimelineBO;
+import com.sns.timeline.domain.CardDTO;
 
 import lombok.RequiredArgsConstructor;
 
@@ -33,20 +35,23 @@ Model은 HTML일 경우 사용(@ResponseBody일 경우 Model 사용 불가)
 public class TimelineController {
 
 	// 어노테이션(Annotation) - DI(Dependency Injection) : 의존성 주입
-	private final PostBO postBO;
-	private final CommentBO commentBO;
+//	private final PostBO postBO;
+//	private final CommentBO commentBO;
+	private final TimelineBO timelineBO;
 	
 	@GetMapping("/timeline")
 	// http:localhost/timeline
 	public String timeline(Model model) {
 		
 		// DB SELECT - breakpoint
-		List<PostEntity> postList = postBO.getPostList();
+		//List<PostEntity> postList = postBO.getPostList();
+		List<CardDTO> cardList = timelineBO.generateCardList();
 		
 		// MODEL 데이터 삽입 - breakpoint
 		// Controller가 Model에 데이터를 삽입
 		// HTML(VIEW)가 Model에서 꺼내서 사용
-		model.addAttribute("postList", postList);
+		// model.addAttribute("postList", postList);
+		model.addAttribute("cardList", cardList);
 		
 		return "timeline/timeline";
 	}

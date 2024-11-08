@@ -42,12 +42,12 @@
 			<div class="timeline-box my-5">
 				
 				<!-- 타임라인 내용(userId, imagePath, content) 영역 -->
-				<div th:each="post : ${postList}" class="card border rounded mt-3">
+				<div th:each="card : ${cardList}" class="card border rounded mt-3">
 					
 					<!-- 내용 시작 - 글쓴이, 더보기 영역 -->
 					<div class="p-2 d-flex justify-content-between bg-secondary">
 						<!-- 글쓴이 => th문법으로 userId로 대체 -->
-						<span class="font-weight-bold" th:text="${post.userId}">글쓴이</span>
+						<span class="font-weight-bold" th:text="${card.userEntity.loginId}">글쓴이</span>
 						
 						<!-- 더보기(누르면 `삭제`, `취소`) -->
 						<a href="#" class="more-btn">
@@ -57,7 +57,7 @@
 					
 					<!-- imagePath 영역 -->
 					<div class="card-img">
-						<img th:src="${post.imagePath}" class="w-100" alt="본문 이미지">
+						<img th:src="${card.postEntity.imagePath}" class="w-100" alt="본문 이미지">
 					</div>
 						
 					<!-- 좋아요 -->
@@ -70,8 +70,8 @@
 					
 					<!-- userId, content 영역 -->
 					<div class="card-post m-3">
-						<span class="font-weight-bold" th:text="${post.userId}">userId</span>
-						<span th:text="${post.content}">content</span>
+						<span class="font-weight-bold" th:text="${card.postEntity.userId}">userId</span>
+						<span th:text="${card.postEntity.content}">content</span>
 					</div>
 					
 					
@@ -85,9 +85,7 @@
 						<div class="card-comment m-1">
 							<!-- userId, content 영역 -->
 							<span class="font-weight-bold">userId</span>
-							<!-- <span class="font-weight-bold" th:text="${post.userId}">userId</span> -->
 							<span >content</span>
-							<!-- <span th:text="${comment.content}">content</span> -->
 							
 							<!-- 로그인이 되어 있을 경우 -->
 							<div th:if="${session.userName != null}">
@@ -104,7 +102,7 @@
 							<!-- 댓글 작성 영역 -->
 							<div class="comment-write d-flex border-top mt-2">
 								<input type="text" class="comment-input form-control border-0 mr-2" placeholder="댓글 내용을 입력해주세요">
-								<button type="button" class="comment-btn btn btn-light text-primary w-25" th:data-post-id="${post.id}">게시</button>
+								<button type="button" class="comment-btn btn btn-light text-primary w-25" th:data-post-id="${card.postEntity.id}">게시</button>
 							</div>
 						</div>						
 						
