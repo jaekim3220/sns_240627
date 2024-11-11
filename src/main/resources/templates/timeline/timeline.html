@@ -62,7 +62,7 @@
 						
 					<!-- 좋아요 -->
 					<div class="card-like m-3">
-						<a href="#" class="like-btn">
+						<a href="#" class="like-btn"  th:data-post-id="${card.postEntity.id}">
 							<img src="img/timeline/heart-icon.png" width="20" height="18" alt="empty heart">
 						</a>
 						<span>좋아요 n개</span>
@@ -82,10 +82,10 @@
 					
 					<!-- 댓글 시작(userId, imagePath, content) -->
 					<div class="card-comment-list m-2">
-						<div class="card-comment m-1">
+						<div class="card-comment m-1" th:each="commentDTO : ${card.commentList}"> <!-- cardDTO의 commentList 메서드 추출 -->
 							<!-- userId, content 영역 -->
-							<span class="font-weight-bold">userId</span>
-							<span >content</span>
+							<span class="font-weight-bold" th:text="${commentDTO.user.loginId}">userId</span>
+							<span th:text="${commentDTO.comment.content}">content</span>
 							
 							<!-- 로그인이 되어 있을 경우 -->
 							<div th:if="${session.userName != null}">
