@@ -82,7 +82,7 @@
 							
 							<!-- 댓글 삭제 -->
 							<!-- UserRestController의 session -->
-							<a th:if="${session.userId == commentDTO.comment.userId}" href="#" class="comment-del-btn">
+							<a th:if="${session.userId == commentDTO.comment.userId}" href="#" class="comment-del-btn" th:data-comment-id="${commentDTO.comment.id}">
 								<img src="img/timeline/x-icon.png" width="10" height="10">
 							</a>
 						</div>
@@ -283,6 +283,37 @@
     			
     			
     		}); // `게시` 버튼을 클릭(댓글 쓰기) 종료
+    		
+    		
+    		// 댓글 삭제
+    		$(".comment-del-btn").on("click", function(e) {
+    			e.preventDefault(); // a 태그 상단 올라가는 현상 방지
+    			// alert("댓글 삭제");
+    			
+    			// validation
+    			let commentId = $(this).data("comment-id");
+    			// alert(commentId);
+    			
+    			$.ajax({
+    				// request
+    				tye:"DELETE",
+    				url:"/comment/delete",
+    				data:{"commentId":commentId}, 
+    				
+    				// response
+    				success:function(data) {
+						if (data.code == 200) {
+							location.reload(true);
+						} else {
+							alert(data.error_message);
+						}
+					},
+					error:function(request, status, error) {
+						alert("댓글 삭제 하는데 실패했습니다.");
+					}
+    			});
+    			
+    		}); // 댓글 삭제 종료
     		
     		
     	});
