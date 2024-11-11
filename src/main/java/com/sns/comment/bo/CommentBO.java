@@ -9,6 +9,9 @@ import org.springframework.stereotype.Service;
 import com.sns.comment.domain.Comment;
 import com.sns.comment.domain.CommentDTO;
 import com.sns.comment.mapper.CommentMapper;
+import com.sns.user.bo.UserBO;
+
+import lombok.RequiredArgsConstructor;
 
 /*
 DB연동 : View영역 <--> Controller영역(Domain) <--> Service(BO)영역 <--> Repository영역(Mapper) <--> DB영역 
@@ -17,10 +20,12 @@ DB연동 : View영역 <--> Controller영역(Domain) <--> Service(BO)영역 <--> 
 // Service(BO)영역
 
 @Service
+@RequiredArgsConstructor
 public class CommentBO {
 
 	@Autowired
 	private CommentMapper commentMapper;
+	private final UserBO userBO;
 	
 	public void addComment(int postId, int userId, String content) {
 		commentMapper.insertComment(postId, userId, content);
@@ -42,11 +47,18 @@ public class CommentBO {
 		// 반복문 : Comment => CommentDTO => list에 삽입
 		for(Comment comment : commentList) { // 향상된 for문
 			// 생성한 DTO를 사용해 DB 데이터를 받을 변수를 생성 - breakpoint
+			CommentDTO commentDTO = new CommentDTO();
 			
 			// DTO 변수에 setter를 사용해 `comment`의 글 정보 삽입 - breakpoint
+			// 댓글 1개
+			commentDTO.setComment(comment);
 			
 			// DTO 변수에 `comment`의 글쓴이 정보 삽입 - breakpoint
+			// int userId = comment.getUserId(); // 글쓴이 번호
+			commentDTO.setUser(userBO.getUserEntityById(comment.getUserId()));
 			
+			// ★★★★★ list에 DTD 삽입 - breakpoint
+			commentDTOList.add(commentDTO);
 		}
 		
 		return commentDTOList;
