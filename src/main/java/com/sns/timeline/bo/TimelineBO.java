@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.sns.comment.bo.CommentBO;
 import com.sns.post.bo.PostBO;
 import com.sns.post.entity.PostEntity;
 import com.sns.timeline.domain.CardDTO;
@@ -24,6 +25,7 @@ public class TimelineBO {
 	// 어노테이션(Annotation) - DI(Dependency Injection) : 의존성 주입
 	private final PostBO postBO;
 	private final UserBO userBO;
+	private final CommentBO commentBO;
 
 	
 	// input : X 
@@ -50,6 +52,13 @@ public class TimelineBO {
 			// int userId = postEntity.getUserId(); // 글쓴이 번호
 			// 2) - User 영역을 거친 후 userId 데이터를 가져올 수 있도록 UserBO에 새로운 메서드 생성
 			card.setUserEntity(userBO.getUserEntityById(postEntity.getUserId()));
+			
+			
+			// DTO 변수에 `글`에 포함된 `comment`의 목록 삽입 - breakpoint
+			// CommentBO => CommentDTO List 
+			// 글 번호(postId)에 맞는 댓글 목록을 추출 
+			card.setCommentList(commentBO.generateCommentList(postEntity.getId()));
+			
 			
 			
 			// ★★★★★ list에 DTD 삽입 - breakpoint
