@@ -51,4 +51,14 @@
 			`postId` = #{postId}
 	</select>
 	
+	
+	<!-- @DeleteMapping("/delete") -->
+	<delete id="deleteCommentById" parameterType="int">
+		DELETE
+		FROM	
+			`comment`
+		WHERE
+			`id` =  #{commentId}
+	</delete>
+	
 </mapper>

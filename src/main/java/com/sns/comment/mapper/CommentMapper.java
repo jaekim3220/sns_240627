@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.web.bind.annotation.DeleteMapping;
 
 import com.sns.comment.domain.Comment;
 
@@ -25,4 +26,8 @@ public interface CommentMapper {
 	// DTO 생성
 	public List<Comment> selectCommentList();
 	public List<Comment> selectCommentListByPostId(int postId);
+	
+	// 댓글 삭제
+	// @DeleteMapping("/delete")
+	public int deleteCommentById(int commentId);
 }

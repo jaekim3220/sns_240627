@@ -64,4 +64,10 @@ public class CommentBO {
 		return commentDTOList;
 	}
 	
+	
+	// @DeleteMapping("/delete")
+	public void deleteCommentById(int commentId) {
+		commentMapper.deleteCommentById(commentId);
+	}
+	
 }
