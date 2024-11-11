@@ -81,7 +81,8 @@
 							<span th:text="${commentDTO.comment.content}">content</span>
 							
 							<!-- 댓글 삭제 -->
-							<a th:if="${session.userName != null}" href="#" class="comment-del-btn">
+							<!-- UserRestController의 session -->
+							<a th:if="${session.userId == commentDTO.comment.userId}" href="#" class="comment-del-btn">
 								<img src="img/timeline/x-icon.png" width="10" height="10">
 							</a>
 						</div>
