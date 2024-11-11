@@ -3,6 +3,7 @@ package com.sns.comment;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -80,5 +81,32 @@ public class CommentRestController {
 		
 	}
 	
+	
+	@DeleteMapping("/delete")
+	public Map<String, Object> delete(
+			// 필수 파라미터 불러오기1 : value, required 생략 (추천) - null이 아닌 column - lesson03 참고
+			@RequestParam("commentId") int commentId,
+			HttpSession session) {
+		
+		// 로그인 여부 - breakpoint
+		Map<String, Object> result = new HashMap<>();
+		Integer userId = (Integer)session.getAttribute("userId");
+		if (userId == null) {
+			result.put("code", 403);
+			result.put("error_message", "로그인이 되지 않은 사용자 입니다.");
+			return result;
+		}
+		
+		
+		// DB DELETE - breakpoint
+		commentBO.deleteCommentById(commentId);
+		
+		
+		// Response(응답값) - breakpoint
+		result.put("code", 200);
+		result.put("result", "성공");
+		
+		return result;
+	}
 	
 }
