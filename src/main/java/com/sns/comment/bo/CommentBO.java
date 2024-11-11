@@ -1,5 +1,6 @@
 package com.sns.comment.bo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,9 +32,11 @@ public class CommentBO {
 	// `글` 하나에 포함된 댓글 목록을 추출
 	public List<CommentDTO> generateCommentList(int postId) {
 		// `int postId`에 해당하는 comment 목록을 담을 List 변수 생성
+		List<CommentDTO> commentDTOList = new ArrayList<>();
 		
 		
 		// 게시글(card)에 해당하는 댓글 추출(List<Comment>) - breakpoint
+		List<Comment> commentList = commentMapper.selectCommentListByPostId(postId);
 		
 		
 		// 반복문 : Comment => CommentDTO => list에 삽입
