@@ -1,5 +1,8 @@
 package com.sns.timeline.domain;
 
+import java.util.List;
+
+import com.sns.comment.domain.CommentDTO;
 import com.sns.post.entity.PostEntity;
 import com.sns.user.entity.UserEntity;
 
@@ -23,6 +26,7 @@ public class CardDTO {
 	
 	
 	// 댓글 N개
+	private List<CommentDTO> commentList;
 	
 	
 	// 좋아요 N개
