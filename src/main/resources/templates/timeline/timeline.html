@@ -55,8 +55,10 @@
 						
 					<!-- 좋아요 -->
 					<div class="card-like m-3">
-						<a href="#" class="like-btn"  th:data-post-id="${card.postEntity.id}">
+						<a th:if="${card.filledLike == false}" href="#" class="like-btn"  th:data-post-id="${card.postEntity.id}">
 							<img src="img/timeline/heart-icon.png" width="20" height="18" alt="empty heart">
+						</a>
+						<a th:unless="${card.filledLike == false}" href="#" class="like-btn"  th:data-post-id="${card.postEntity.id}">
 							<img src="img/timeline/heart-icon (1).png" width="20" height="18" alt="empty heart">
 						</a>
 						<span th:text="|좋아요 ${card.likeCount}개|">좋아요 n개</span>
