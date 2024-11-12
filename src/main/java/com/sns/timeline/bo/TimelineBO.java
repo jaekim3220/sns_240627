@@ -30,7 +30,7 @@ public class TimelineBO {
 	private final LikeBO likeBO;
 
 	
-	// input : X 
+	// input : 로그인한 사용자의 Id 
 	// output : List<CardDTO>
 	// HTML의 .card 목록(class)을 List로 만들고 post를 담는 각 .card를 List에 담는다.  
 	public List<CardDTO> generateCardList(Integer userId) {
