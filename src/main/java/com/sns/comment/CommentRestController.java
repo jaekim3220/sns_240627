@@ -50,7 +50,13 @@ public class CommentRestController {
 	private final CommentBO commentBO;
 	
 	
-	// 댓글 쓰기 API
+	/**
+	 * 댓글쓰기 API
+	 * @param postId
+	 * @param content
+	 * @param session
+	 * @return
+	 */
 	@PostMapping("/create")
 	// http:localhost/comment/create?postId=1&content=댓글테스트
 	// http:localhost/comment/create
@@ -82,6 +88,12 @@ public class CommentRestController {
 	}
 	
 	
+	/**
+	 * 댓글 삭제 API
+	 * @param commentId
+	 * @param session
+	 * @return
+	 */
 	@DeleteMapping("/delete")
 	public Map<String, Object> delete(
 			// 필수 파라미터 불러오기1 : value, required 생략 (추천) - null이 아닌 column - lesson03 참고

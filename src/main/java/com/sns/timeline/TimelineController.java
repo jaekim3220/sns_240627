@@ -39,6 +39,12 @@ public class TimelineController {
 //	private final CommentBO commentBO;
 	private final TimelineBO timelineBO;
 	
+	
+	/**
+	 * sns 화면 DTO 생성
+	 * @param model
+	 * @return
+	 */
 	@GetMapping("/timeline")
 	// http:localhost/timeline
 	public String timeline(Model model) {
