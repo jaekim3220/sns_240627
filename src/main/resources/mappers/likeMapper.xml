@@ -3,19 +3,24 @@
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.sns.like.mapper.LikeMapper">
-	<select id="selectLikeByPostIdUserId" parameterType="int" resultType="com.sns.like.domain.Like">
+
+	<!-- @GetMapping("/like/{postId}") -->
+	<!-- 파라미터가 다수일 경우 map 
+	추출 행의 수를 return 받아 int 형식
+	resultType을 행(com.sns.like.domain.Like)으로 진행해도 무방 -->
+	<select id="selectLikeCountByPostIdUserId" parameterType="map" resultType="int">
+		
 		SELETE
-			*
+			COUNT(1)
 		FROM
 			`like`
 		WHERE
-			`postId` = #{postId},
-			`userId` = #{userId}
-			
+			`postId` = #{postId} AND `userId` = #{userId}
+		
 	</select>
 	
-	
-	<insert id="insertComment" parameterType="map">
+	<!-- @GetMapping("/like/{postId}") -->
+	<insert id="insertLike" parameterType="map">
 		INSERT INTO `like`
 		(
 			`postId`,
@@ -30,13 +35,12 @@
 		)
 	</insert>
 	
-	
-	<delete id="deleteLikeByPostIdUserId" parameterType="com.sns.like.domain.Like">
+	<!-- @GetMapping("/like/{postId}") -->
+	<delete id="deleteLikeByPostIdUserId" parameterType="map">
 		DELETE
 		FROM
 			`like`
 		WHERE
-			`postId` = #{postId},
-			`userId` = #{userId}
+			`postId` = #{postId} AND `userId` = #{userId}
 	</delete>
 </mapper>
