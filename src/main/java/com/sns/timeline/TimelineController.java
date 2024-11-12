@@ -13,6 +13,7 @@ import com.sns.post.entity.PostEntity;
 import com.sns.timeline.bo.TimelineBO;
 import com.sns.timeline.domain.CardDTO;
 
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 
 /*
@@ -47,11 +48,15 @@ public class TimelineController {
 	 */
 	@GetMapping("/timeline")
 	// http:localhost/timeline
-	public String timeline(Model model) {
+	public String timeline(Model model, HttpSession session) {
+		
+		// 로그인한 사용자의 데이터 추출
+		// UserRestController 참고
+		Integer userId = (Integer)session.getAttribute("userId");
 		
 		// DB SELECT - breakpoint
 		//List<PostEntity> postList = postBO.getPostList();
-		List<CardDTO> cardList = timelineBO.generateCardList();
+		List<CardDTO> cardList = timelineBO.generateCardList(userId);
 		
 		// MODEL 데이터 삽입 - breakpoint
 		// Controller가 Model에 데이터를 삽입
