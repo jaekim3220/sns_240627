@@ -42,4 +42,9 @@ public interface LikeMapper {
 			@Param("postId") int postId,
 			@Param("userId") int userId);
 	
+	
+	// input : postId
+	// output : 좋아요 개수(int)
+	public int selectLikeCountByPostId(int postId);
+	
 }
