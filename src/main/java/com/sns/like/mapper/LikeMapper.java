@@ -16,19 +16,27 @@ public interface LikeMapper {
 
 	
 	// input : postId, userId
-	// output : Like
-	public Like selectLikeByPostIdUserId();
+	// output : int
+	// @GetMapping("/like/{postId}")
+	public int selectLikeCountByPostIdUserId(
+			// 다수의 파라미터일 경우 @Param 설정
+			@Param("postId") int postId, 
+			@Param("userId") int userId);
 	
 	
 	// input : postId, userId
 	// output : X
-	public void insertComment(
+	// return(outPut) : 1 존재(like 존재), 0 부재(like 없음)
+	// @GetMapping("/like/{postId}")
+	public void insertLike(
+			// 다수의 파라미터일 경우 @Param 설정
 			@Param("postId") int postId,
 			@Param("userId") int userId);
 	
 	
 	// input : postId, userId
 	// output : Like
+	// @GetMapping("/like/{postId}")
 	public int deleteLikeByPostIdUserId();
 	
 }
