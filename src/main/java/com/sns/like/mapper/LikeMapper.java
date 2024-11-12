@@ -18,11 +18,22 @@ public interface LikeMapper {
 	// input : postId, userId
 	// output : int
 	// @GetMapping("/like/{postId}")
-	public int selectLikeCountByPostIdUserId(
+//	public int selectLikeCountByPostIdUserId(
+//			// 다수의 파라미터일 경우 @Param 설정
+//			@Param("postId") int postId, 
+//			@Param("userId") int userId);
+	
+	
+	// input : postId
+	// output : 좋아요 개수(int)
+//	public int selectLikeCountByPostId(int postId);
+	
+	
+	// 두 메서드를 합친 하나의 쿼리
+	public int selectLikeCountByPostIdOrUserId(
 			// 다수의 파라미터일 경우 @Param 설정
 			@Param("postId") int postId, 
-			@Param("userId") int userId);
-	
+			@Param("userId") Integer userId);
 	
 	// input : postId, userId
 	// output : X
@@ -41,10 +52,6 @@ public interface LikeMapper {
 			// 다수의 파라미터일 경우 @Param 설정
 			@Param("postId") int postId,
 			@Param("userId") int userId);
-	
-	
-	// input : postId
-	// output : 좋아요 개수(int)
-	public int selectLikeCountByPostId(int postId);
+
 	
 }

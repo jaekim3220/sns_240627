@@ -30,6 +30,20 @@
 	</select>
 	
 	
+	<!-- MyBatis 문법을 사용해 두 count 쿼리를 하나로 병합 -->
+	<select id="selectLikeCountByPostIdOrUserId" parameterType="map" resultType="int">
+		SELECT
+			COUNT(1)
+		FROM
+			`like`
+		WHERE
+			`postId` = #{postId}
+			<if test="userId != null">
+			AND `userId` = #{userId}
+			</if>
+	</select>
+	
+	
 	<!-- @GetMapping("/like/{postId}") -->
 	<insert id="insertLike" parameterType="map">
 		INSERT INTO `like`
