@@ -19,6 +19,17 @@
 		
 	</select>
 	
+	<!-- 좋아요 개수 -->
+	<select id="selectLikeCountByPostId" parameterType="int" resultType="int">
+		SELECT
+			COUNT(1)
+		FROM
+			`like`
+		WHERE
+			`postId` = #{postId}
+	</select>
+	
+	
 	<!-- @GetMapping("/like/{postId}") -->
 	<insert id="insertLike" parameterType="map">
 		INSERT INTO `like`
