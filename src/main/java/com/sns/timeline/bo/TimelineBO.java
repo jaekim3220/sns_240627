@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.sns.comment.bo.CommentBO;
+import com.sns.like.bo.LikeBO;
 import com.sns.post.bo.PostBO;
 import com.sns.post.entity.PostEntity;
 import com.sns.timeline.domain.CardDTO;
@@ -26,6 +27,7 @@ public class TimelineBO {
 	private final PostBO postBO;
 	private final UserBO userBO;
 	private final CommentBO commentBO;
+	private final LikeBO likeBO;
 
 	
 	// input : X 
@@ -59,6 +61,9 @@ public class TimelineBO {
 			// 글 번호(postId)에 맞는 댓글 목록을 추출 
 			card.setCommentList(commentBO.generateCommentList(postEntity.getId()));
 			
+			
+			// 좋아요 개수
+			card.setLikeCount(likeBO.getLikeCountByPostId(postEntity.getId()));
 			
 			
 			// ★★★★★ list에 DTD 삽입 - breakpoint
