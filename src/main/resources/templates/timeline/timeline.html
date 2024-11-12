@@ -58,7 +58,7 @@
 						<a href="#" class="like-btn"  th:data-post-id="${card.postEntity.id}">
 							<img src="img/timeline/heart-icon.png" width="20" height="18" alt="empty heart">
 						</a>
-						<span>좋아요 n개</span>
+						<span th:text="|좋아요 ${card.likeCount}개|">좋아요 n개</span>
 					</div>
 					
 					<!-- userId, content 영역 -->
