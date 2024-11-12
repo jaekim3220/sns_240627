@@ -37,4 +37,11 @@ public class LikeBO {
 	}
 	
 	
+	// 글(postId)에 해당하는 좋아요 개수
+	// input : 글 번호(postId)
+	// output : 좋아요 개수
+	public int getLikeCountByPostId(int postId) {
+		return likeMapper.selectLikeCountByPostId(postId);
+	}
+	
 }
