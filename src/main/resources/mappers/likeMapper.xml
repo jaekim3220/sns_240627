@@ -10,7 +10,7 @@
 	resultType을 행(com.sns.like.domain.Like)으로 진행해도 무방 -->
 	<select id="selectLikeCountByPostIdUserId" parameterType="map" resultType="int">
 		
-		SELETE
+		SELECT
 			COUNT(1)
 		FROM
 			`like`
