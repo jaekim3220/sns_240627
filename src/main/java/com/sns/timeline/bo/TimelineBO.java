@@ -33,7 +33,7 @@ public class TimelineBO {
 	// input : X 
 	// output : List<CardDTO>
 	// HTML의 .card 목록(class)을 List로 만들고 post를 담는 각 .card를 List에 담는다.  
-	public List<CardDTO> generateCardList() {
+	public List<CardDTO> generateCardList(Integer userId) {
 		List<CardDTO> cardList = new ArrayList<>();
 		
 		// 글 목록 추출(모든 목록을 추출 후 List 형식으로 저장) - breakpoint
@@ -64,6 +64,11 @@ public class TimelineBO {
 			
 			// 좋아요 개수
 			card.setLikeCount(likeBO.getLikeCountByPostId(postEntity.getId()));
+			
+			
+			// 좋아요 이미지 설정
+			// 하트 채울지 말지 여부
+			card.setFilledLike(likeBO.filledLikeByPostIdUserId(postEntity.getId(), userId));
 			
 			
 			// ★★★★★ list에 DTD 삽입 - breakpoint
