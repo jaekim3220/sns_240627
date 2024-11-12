@@ -37,6 +37,9 @@ public interface LikeMapper {
 	// input : postId, userId
 	// output : Like
 	// @GetMapping("/like/{postId}")
-	public int deleteLikeByPostIdUserId();
+	public int deleteLikeByPostIdUserId(
+			// 다수의 파라미터일 경우 @Param 설정
+			@Param("postId") int postId,
+			@Param("userId") int userId);
 	
 }
