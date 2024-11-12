@@ -1,5 +1,6 @@
 package com.sns.like.bo;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -42,6 +43,25 @@ public class LikeBO {
 	// output : 좋아요 개수
 	public int getLikeCountByPostId(int postId) {
 		return likeMapper.selectLikeCountByPostId(postId);
+	}
+	
+	
+	// 좋아요 이미지 설정
+	// input : postId(글 번호), userId(로그인된 사람)
+	// 로그인 유저 또는 비로그인 유저(userId)
+	// postEntity는 글쓴이의 데이터
+	// 로그인된 유저는 TimelineController에서만 꺼낼 수 있음
+	// output : boolean(채운다 : true, 비운다 : false)
+	public boolean filledLikeByPostIdUserId(int postId, Integer userId) {
+		// 1. 비로그인 => 빈 하트
+		if (userId == null) {
+			return false;
+		}
+		int likeCount = likeMapper.selectLikeCountByPostIdUserId(postId, userId);
+
+		// 2. 로그인 => 누른적 없으면 빈 하트
+		// 3. 로그인 => 누른적 있으면 채워진 하트
+		return likeCount > 0; 
 	}
 	
 }
