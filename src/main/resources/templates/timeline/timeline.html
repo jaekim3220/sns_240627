@@ -323,16 +323,39 @@
     			
     			
     			// validation
-    			
+    			let postId = $(this).data("post-id");
+    			// alert(postId);
     			
     			// AJAX 요청
-    			
+    			$.ajax({
+    				// request
+    				type:"GET", // type 제외 시 자동으로 GET
+    				url:"/like/" + postId,
+    				// 입력 값 : 없음
+    				
+    				// response
+    				success:function(data) {
+    					// 성공일 때 alert 후 목록 화면으로 이동
+    					if (data.result == "성공") { // Dictionary 형태
+    						// Ajax의 응답은 String => JQuery의 함수가 JSON임을 알면
+    						// => Dictionary 형식으로 변경
+    						// {code:200, result:"성공"}
+    						// 새로고침 => 카드를 가져올 때 하트를 가져올지 말지 결정
+    						location.reload();
+    					} else if(data.code == 403) { // 비로그인 일 경우
+    						alert(data.error_message)
+    						location.href = "/user/sign-in-view";
+    					}
+    				}, // 성공일 경우
+    				error:function(e) {
+    					alert("좋아요 클릭에 실패했습니다.");
+    				}
     			
     		}); // 좋아요 버튼 클릭 종룍
     		
     		
-    		
     	});
-    
+    		
+    });
     </script>
 </th:block>
