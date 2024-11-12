@@ -30,5 +30,10 @@ public class CardDTO {
 	
 	
 	// 좋아요 N개
+	private int likeCount;
+	
+	
+	// 좋아요 여부
+	private boolean filledLike;
 	
 }
