@@ -43,7 +43,8 @@
 						<span class="font-weight-bold" th:text="${card.userEntity.loginId}">글쓴이</span>
 						
 						<!-- 더보기(누르면 `삭제`, `취소`) -->
-						<a href="#" class="more-btn">
+						<a th:if="${session.userId == card.postEntity.userId}" href="#" class="more-btn" data-toggle="modal" data-target="#modal" th:data-post-id="${card.postEntity.id}">
+						<!-- cardDTO의 postEntity, userEntity에 글 번호가 저장 -->
 							<img src="img/timeline/more-icon.png" width="30">
 						</a>
 					</div>
@@ -104,6 +105,24 @@
 				
 			</div>
 			
+			<!-- Button trigger modal -->
+			<!-- Modal : 타임리프 레이아웃 때문에 section(fragment) 태그 안쪽에 위치 -->
+			<div class="modal fade" id="modal">
+			<!-- modal-sm : 작은 모달 창 
+			modal-dialog-centered : 수직 기준 가운데 -->
+			  <div class="modal-dialog modal-sm modal-dialog-centered">
+			    <div class="modal-content text-center">
+			    	<div class="py-3">
+			    		<a href="#" id="postDelBtn">삭제하기</a>
+			    	</div>
+			    	<div class="py-3 border-top">
+			    		<a href="#" data-dismiss="modal">취소</a>
+			    	</div>
+			    
+			      </div>
+			    </div>
+			  </div>
+			  
 		</div>
 		
 </section>
@@ -358,6 +377,59 @@
     		
     		
     	});
+    		
+    		
+   		// 더보기 ... 클릭
+   		//1) 모달 뜸
+   		//2) postId를 modal에 끼워 넣기
+   		$(".more-btn").on("click", function() {
+   			let postId = $(this).data("post-id");
+   			// alert(postId);
+   			
+   			
+   			// 1개만 존재하는 modal을 재활용하기 위해
+   			// modal에 data-post-id를 심어 놓는다
+   			$("#modal").data("post-id", postId);// set
+   			// alert(postId);
+   			
+   			
+   			// modal 안에 있는 삭제 클릭 => 모달 안에는 삭제할 글 번호가 존재
+   			$("#postDelBtn").on("click", function(e) {
+   				e.preventDefault();
+   				// alert("삭제");
+   				
+   				let postId = $("#modal").data("post-id"); // get
+   				// alert(postId);
+   			
+	   			// AJAX 요청
+	   			// RestController 생성 전까지는 404
+	   			$.ajax({
+	   				// request
+	   				type:"DELETE", // type 제외 시 자동으로 GET
+	   				url:"/post/delete",
+	   				data:{"postId":postId},
+	   				
+	   				// response
+	   				success:function(data) {// Dictionary 형태
+							// Ajax의 응답은 String => JQuery의 함수가 JSON임을 알면
+							// => Dictionary 형식으로 변경
+							// {code:200, "result":"성공"}
+	    					if(data.code == 200) {
+	    						alert("글이 수정되었습니다.");
+	    						location.reload(true);
+	    					} else {
+								alert(data.error_message);
+							}
+	    				},
+	    				error:function(e) {
+	    					alert("게시글을 삭제하는데 실패했습니다.");
+	    				}
+	   			}); // AJAX 요청 종료
+   			
+   			});
+   			
+   		});// 더보기 ... 클릭 종료
+    		
     		
     });
     </script>

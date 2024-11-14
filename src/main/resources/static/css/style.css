@@ -2,7 +2,7 @@
 
 /* header 영역 */
 header {height:80px; background-color:#ededed;}
-a, a:hover {color:#000;}
+a, a:hover {color:#000; text-decoration:none;}
 
 /* signUp section 영역 */
 .sign-up-box {width:650px; background-color:#ebebeb; margin-top:20px; box-shadow:5px 5px 5px 5px #BDC0C0;}
