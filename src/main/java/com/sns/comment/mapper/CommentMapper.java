@@ -30,4 +30,8 @@ public interface CommentMapper {
 	// 댓글 삭제
 	// @DeleteMapping("/delete")
 	public int deleteCommentById(int commentId);
+	
+	
+	// /post/delete
+	public void deleteCommentListByPostId(int postId);
 }

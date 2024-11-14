@@ -70,4 +70,10 @@ public class CommentBO {
 		commentMapper.deleteCommentById(commentId);
 	}
 	
+	
+	// /post/delete
+	public void deleteCommentListByPostId(int postId) {
+		commentMapper.deleteCommentListByPostId(postId);
+	}
+	
 }
