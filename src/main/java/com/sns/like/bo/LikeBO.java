@@ -64,4 +64,11 @@ public class LikeBO {
 		return likeCount > 0; 
 	}
 	
+	
+	// input : postId
+	// output : X
+	// /post/delete
+	public void deleteLikeListByPostId(int postId) {
+		likeMapper.deleteLikeListByPostId(postId);
+	}
 }

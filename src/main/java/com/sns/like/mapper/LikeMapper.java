@@ -54,4 +54,8 @@ public interface LikeMapper {
 			@Param("userId") int userId);
 
 	
+	// input : postId
+	// output : Like 행
+	// @DeleteMapping("/delete")
+	public int deleteLikeListByPostId(@Param("postId") int postId); // 단일 parameter의 경우 @Param 생략 가능
 }

@@ -68,4 +68,14 @@
 		WHERE
 			`postId` = #{postId} AND `userId` = #{userId}
 	</delete>
+	
+	
+	<!-- /post/delete -->
+	<delete id="deleteLikeByPostId" parameterType="map">
+		DELETE
+		FROM
+			`like`
+		WHERE
+			`postId` = #{postId}
+	</delete>
 </mapper>
