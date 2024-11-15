@@ -63,7 +63,7 @@
 	
 	
 	<!-- /post/delete -->
-	<delete id="deleteCommentByPostId" parameterType="int">
+	<delete id="deleteCommentListByPostId" parameterType="int">
 		DELETE
 		FROM	
 			`comment`
