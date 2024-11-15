@@ -71,7 +71,7 @@
 	
 	
 	<!-- /post/delete -->
-	<delete id="deleteLikeByPostId" parameterType="map">
+	<delete id="deleteLikeListByPostId" parameterType="map">
 		DELETE
 		FROM
 			`like`
